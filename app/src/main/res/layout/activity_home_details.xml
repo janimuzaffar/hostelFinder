@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeDetails">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/priceres"
+                    android:layout_width="152dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="220dp"
+                    android:layout_marginTop="548dp"
+                    android:text="TextView"
+                    android:textColor="#58E0D3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="152dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="68dp"
+                    android:layout_marginTop="548dp"
+                    android:drawableRight="@drawable/ic_add_circle"
+                    android:text="Price"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/phoneno"
+                    android:layout_width="152dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="68dp"
+                    android:layout_marginTop="500dp"
+                    android:drawableRight="@drawable/ic_add_circle"
+                    android:text="Phone Number"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/phoneres"
+                    android:layout_width="152dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="220dp"
+                    android:layout_marginTop="500dp"
+                    android:text="TextView"
+                    android:textColor="#58E0D3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/bedres"
+                    android:layout_width="152dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="220dp"
+                    android:layout_marginTop="372dp"
+                    android:text="TextView"
+                    android:textColor="#58E0D3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/bedrooms"
+                    android:layout_width="152dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="68dp"
+                    android:layout_marginTop="372dp"
+                    android:drawableRight="@drawable/ic_add_circle"
+                    android:text="Bedrooms"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/vacres"
+                    android:layout_width="152dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="220dp"
+                    android:layout_marginTop="416dp"
+                    android:text="TextView"
+                    android:textColor="#58E0D3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/nameown"
+                    android:layout_width="152dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="68dp"
+                    android:layout_marginTop="456dp"
+                    android:drawableRight="@drawable/ic_add_circle"
+                    android:text="Name"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/nameres"
+                    android:layout_width="152dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="220dp"
+                    android:layout_marginTop="456dp"
+                    android:text="TextView"
+                    android:textColor="#58E0D3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/propertySubmitBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="160dp"
+                    android:layout_marginTop="652dp"
+                    android:text="submit"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/ownres"
+                    android:layout_width="151dp"
+                    android:layout_height="27dp"
+                    android:layout_marginStart="220dp"
+                    android:layout_marginTop="284dp"
+                    android:text="TextView"
+                    android:textColor="#58E0D3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/propres"
+                    android:layout_width="152dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="220dp"
+                    android:layout_marginTop="240dp"
+                    android:text="TextView"
+                    android:textColor="#58E0D3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/society"
+                    android:layout_width="152dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="68dp"
+                    android:layout_marginTop="328dp"
+                    android:drawableRight="@drawable/ic_add_circle"
+                    android:text="Society Name"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/vacent"
+                    android:layout_width="152dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="68dp"
+                    android:layout_marginTop="416dp"
+                    android:drawableRight="@drawable/ic_add_circle"
+                    android:text="Vacant"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView25"
+                    android:layout_width="309dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="68dp"
+                    android:layout_marginTop="48dp"
+                    android:text="OWNER / PROPERTY DETAILS"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/societyres"
+                    android:layout_width="152dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="220dp"
+                    android:layout_marginTop="328dp"
+                    android:text="TextView"
+                    android:textColor="#58E0D3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="151dp"
+                    android:layout_height="26dp"
+                    android:layout_marginStart="68dp"
+                    android:layout_marginTop="244dp"
+                    android:drawableRight="@drawable/ic_add_circle"
+                    android:text="Property Name"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/ownership"
+                    android:layout_width="152dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="68dp"
+                    android:layout_marginTop="284dp"
+                    android:drawableRight="@drawable/ic_add_circle"
+                    android:text="Ownership"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/addFilterBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Add filters"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.114"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.931" />
+
+                <ProgressBar
+                    android:id="@+id/propSubmitProgressBar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@+id/propertySubmitBtn"
+                    app:layout_constraintStart_toStartOf="@+id/propertySubmitBtn"
+                    app:layout_constraintTop_toTopOf="@+id/propertySubmitBtn" />
+
+                <ImageView
+                    android:id="@+id/home00"
+                    android:layout_width="40dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.044"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.046"
+                    app:srcCompat="@drawable/ic_home" />
+
+                <ImageView
+                    android:id="@+id/propImageView"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView25"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <Button
+                    android:id="@+id/choosePropImgBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Button"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.485"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/propImageView" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+</ScrollView>
