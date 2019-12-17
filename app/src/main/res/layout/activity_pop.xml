@@ -17,6 +17,7 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textColor="#F5F5F5"
+        android:textSize="36sp"
         tools:layout_editor_absoluteX="142dp"
         tools:layout_editor_absoluteY="161dp" />
 

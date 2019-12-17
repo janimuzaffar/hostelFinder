@@ -165,7 +165,7 @@ public class PopAct extends Activity {
         });
 
         switch (FORM_TYPE) {
-            case "Property Name": {
+            case "Property Location": {
                 propertyNameFormWrapperLL.setVisibility(View.VISIBLE);
                 break;
             }

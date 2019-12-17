@@ -203,7 +203,7 @@
                     android:layout_marginStart="68dp"
                     android:layout_marginTop="244dp"
                     android:drawableRight="@drawable/ic_add_circle"
-                    android:text="Property Name"
+                    android:text="Property Location"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

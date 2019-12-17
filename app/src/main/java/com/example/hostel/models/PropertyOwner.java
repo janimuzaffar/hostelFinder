@@ -10,7 +10,7 @@ public class PropertyOwner {
     public static final String OWNER_NAME = "ownerName";
     public static final String PHONE = "phone";
     public static final String ELIGIBILITY = "eligibility";
-    public static final String FURNISHED = "furnished";
+    public static final String FURNISHING = "furnishing";
     public static final String PROPERTY_LOCATION = "propertyLocation";
     public static final String PROPERTY_IMAGE = "propertyImage";
     public static final String PROPERTY_ID = "propertyId";
@@ -33,7 +33,20 @@ public class PropertyOwner {
 
     public PropertyOwner() {}
 
-   public PropertyOwner(String propName, int price, String ownership,String socityName,String bedrooms,String vacant,String ownerName,String phone,String eligibility,String furnishing,String propertyLocation,String propertyImage, String userId) {
+   public PropertyOwner(
+           String propName,
+           int price,
+           String ownership,
+           String socityName,
+           String bedrooms,
+           String vacant,
+           String ownerName,
+           String phone,
+           String eligibility,
+           String furnishing,
+           String propertyLocation,
+           String propertyImage,
+           String userId) {
   //  public PropertyOwner(String propName, int price) {
         this.propertyName = propName;
         this.ownership=ownership;
@@ -91,7 +104,7 @@ public class PropertyOwner {
         this.bedrooms = bedrooms;
     }
 
-    public String isVacant() {
+    public String getVacant() {
         return vacant;
     }
 

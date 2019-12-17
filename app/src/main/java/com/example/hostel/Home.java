@@ -27,6 +27,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Home extends Fragment {
@@ -37,6 +38,13 @@ public class Home extends Fragment {
 
     RecyclerView propertyListRecyclerView;
     ImageButton filterImageBtn;
+    String searchProperty;
+
+    public Home() {}
+
+    public Home(String searchPattern) {
+        this.searchProperty = searchPattern;
+    }
 
     @Nullable
     @Override
@@ -44,13 +52,10 @@ public class Home extends Fragment {
         Log.d("HOME_FRAG", "Home fragment onCreateView");
         View view = inflater.inflate(R.layout.home_fregment,container,false);
 
-
         filterImageBtn = view.findViewById(R.id.filterImageBtn);
         propertyListRecyclerView = view.findViewById(R.id.propertyListRecyclerView);
         propertyListRecyclerView.setHasFixedSize(true);
         propertyListRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        getAllPropertyData();
 
         filterImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +63,15 @@ public class Home extends Fragment {
                 openDialogPopup();
             }
         });
+
+        Log.d("HOME", searchProperty != null ? searchProperty : "no patterns");
+
+        if (searchProperty != null) {
+            getAllPropertyData(searchProperty);
+        }
+        else {
+            getAllPropertyData(null);
+        }
 
         return view;
     }
@@ -67,10 +81,11 @@ public class Home extends Fragment {
         super.onCreate(savedInstanceState);
         Log.d("HOME_FRAG", "Home fragment onCreate");
         firestore = FirebaseFirestore.getInstance();
-        propertyOwnerList = new ArrayList<>();
     }
 
-    public void getAllPropertyData() {
+    public void getAllPropertyData(final String sp) {
+        propertyOwnerList = new ArrayList<>();
+
         firestore.collection(TableNames.PROPERTY_OWNERS).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -83,10 +98,23 @@ public class Home extends Fragment {
 
                                 prop.setPrice(Integer.parseInt(doc.get(PropertyOwner.PRICE).toString()));
                                 prop.setPropertyName(doc.getString(PropertyOwner.PROPERTY_NAME));
+                                prop.setSocityName(doc.getString(PropertyOwner.SOCITY_NAME));
+                                prop.setBedrooms(doc.getString(PropertyOwner.BEDROOMS));
+                                prop.setVacant(doc.getString(PropertyOwner.VACANT));
+                                prop.setOwnerName(doc.getString(PropertyOwner.OWNER_NAME));
+                                prop.setPhone(doc.getString(PropertyOwner.PHONE));
+                                prop.setEligibility(doc.getString(PropertyOwner.ELIGIBILITY));
                                 prop.setPropertyImage(doc.getString(PropertyOwner.PROPERTY_IMAGE));
+                                prop.setPropertyLocation(doc.getString(PropertyOwner.PROPERTY_LOCATION));
+                                prop.setFurnishing(doc.getString(PropertyOwner.FURNISHING));
                                 prop._setPropertyId(doc.getId());
 
-                                propertyOwnerList.add(prop);
+                                if (sp != null && doc.getString(PropertyOwner.PROPERTY_LOCATION).toLowerCase().contains(sp.toLowerCase().trim()))
+                                    propertyOwnerList.add(prop);
+
+                                if (sp == null)
+                                    propertyOwnerList.add(prop);
+
                             }
 
                             listAdapter = new PropertyListAdapter(getContext(), propertyOwnerList);
@@ -101,7 +129,7 @@ public class Home extends Fragment {
 
         View v = LayoutInflater.from(getContext()).inflate(R.layout.home_filter_layout, null);
 
-        final List<String> priceFilterList = new ArrayList<>();
+        final HashMap<String, String> propListFilter = new HashMap<>();
 
         RadioButton gt1k, gt3k, gt6k, gt10k, BOYS, GIRLS, FAMILY, ANY, BHK1, BHK2, BHK3, BHK4, FULL, SEMI, NOT;
         Button closeFilterPopupBtn, applyFilterBtn;
@@ -139,40 +167,105 @@ public class Home extends Fragment {
         gt1k.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) priceFilterList.add(Integer.toString(1000));
-                else priceFilterList.remove(Integer.toString(1000));
+                if (b) propListFilter.put("price", Integer.toString(1000));
             }
         });
 
         gt3k.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) priceFilterList.add(Integer.toString(3000));
-                else priceFilterList.remove(Integer.toString(3000));
+                if (b) propListFilter.put("price", Integer.toString(3000));
             }
         });
 
         gt6k.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) priceFilterList.add(Integer.toString(6000));
-                else priceFilterList.remove(Integer.toString(6000));
+                if (b) propListFilter.put("price", Integer.toString(6000));
             }
         });
 
         gt10k.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) priceFilterList.add(Integer.toString(10000));
-                else priceFilterList.remove(Integer.toString(10000));
+                if (b) propListFilter.put("price", Integer.toString(10000));
             }
         });
 
         BOYS.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) priceFilterList.add("boys");
-                else priceFilterList.remove("boys");
+                if (b) propListFilter.put("category", "BOYS");
+            }
+        });
+        GIRLS.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) propListFilter.put("category", "GIRLS");
+            }
+        });
+
+        FAMILY.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) propListFilter.put("category", "FAMILY");
+            }
+        });
+
+        ANY.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) propListFilter.put("category", "ANY");
+            }
+        });
+
+        BHK1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) propListFilter.put("bedrooms", "1BHK");
+            }
+        });
+
+        BHK2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) propListFilter.put("bedrooms", "2BHK");
+            }
+        });
+
+        BHK3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) propListFilter.put("bedrooms", "3BHK");
+            }
+        });
+
+        BHK4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) propListFilter.put("bedrooms", "4BHK");
+            }
+        });
+
+
+        NOT.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) propListFilter.put("furnishing", "NOT");
+            }
+        });
+
+        SEMI.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) propListFilter.put("furnishing", "SEMI");
+            }
+        });
+
+        FULL.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) propListFilter.put("furnishing", "FULLY");
             }
         });
 
@@ -182,7 +275,11 @@ public class Home extends Fragment {
                 List<PropertyOwner> filteredProperty = new ArrayList<>();
 
                 for (PropertyOwner p : propertyOwnerList) {
-                    if (p.getPrice() > Integer.parseInt(priceFilterList.get(0))) {
+                    if ((propListFilter.get("price") != null && p.getPrice() > Integer.parseInt(propListFilter.get("price"))) ||
+                            (propListFilter.get("bedrooms") != null && p.getBedrooms().equals(propListFilter.get("bedrooms"))) ||
+                            (propListFilter.get("furnishing") != null && p.getFurnishing().equals(propListFilter.get("furnishing"))) ||
+                            (propListFilter.get("category") != null && p.getEligibility().equals(propListFilter.get("category")))
+                    ) {
                         filteredProperty.add(p);
                     }
                 }

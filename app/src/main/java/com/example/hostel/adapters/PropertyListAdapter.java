@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,14 +38,32 @@ public class PropertyListAdapter extends RecyclerView.Adapter<PropertyListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull PropertyListViewHolder holder, final int position) {
+
         holder.propertyPriceTV.setText(Integer.toString(propOwnerList.get(position).getPrice()));
         holder.propNameTV.setText(propOwnerList.get(position).getPropertyName());
+        holder.propertyRoomsTV.setText(propOwnerList.get(position).getBedrooms());
+
+        switch (propOwnerList.get(position).getFurnishing()) {
+            case "FULLY": {
+                holder.propertyFurnishedTV.setText("Fully Furnished");
+                break;
+            }
+            case "SEMI": {
+                holder.propertyFurnishedTV.setText("Semi Furnished");
+                break;
+            }
+            case "NOT": {
+                holder.propertyFurnishedTV.setText("Not Furnished");
+                break;
+            }
+        }
 
         if (propOwnerList.get(position).getPropertyImage() != null) {
             Picasso.get().load(propOwnerList.get(position).getPropertyImage()).into(holder.propertyImageView);
         }
 
-        holder.propNameTV.setOnClickListener(new View.OnClickListener() {
+
+        holder.viewPropertyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 context.startActivity(new Intent(context, PropertyActivity.class).putExtra(PropertyOwner.PROPERTY_ID, propOwnerList.get(position)._getPropertyId()));
@@ -59,8 +78,9 @@ public class PropertyListAdapter extends RecyclerView.Adapter<PropertyListAdapte
 
     class PropertyListViewHolder extends RecyclerView.ViewHolder {
 
-        TextView propertyPriceTV, propNameTV;
+        TextView propertyPriceTV, propNameTV, propertyFurnishedTV, propertyRoomsTV;
         ImageView propertyImageView;
+        Button viewPropertyBtn;
 
         public PropertyListViewHolder(@NonNull View iv) {
             super(iv);
@@ -68,6 +88,9 @@ public class PropertyListAdapter extends RecyclerView.Adapter<PropertyListAdapte
             propertyPriceTV = iv.findViewById(R.id.propertyPriceTV);
             propNameTV = iv.findViewById(R.id.propNameTV);
             propertyImageView = iv.findViewById(R.id.propertyImageView);
+            propertyRoomsTV = iv.findViewById(R.id.propertyRoomsTV);
+            propertyFurnishedTV = iv.findViewById(R.id.propertyFurnishedTV);
+            viewPropertyBtn = iv.findViewById(R.id.viewPropertyBtn);
 
         }
     }

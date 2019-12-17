@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -56,18 +57,17 @@ public class HomeDetails extends AppCompatActivity {
     TextView phone,phoneres;
     TextView price,priceres;
 
-    RadioGroup cato_rg,farni_rg;
-    RadioButton radioButton,radioButton1;
+    RadioButton radioButton, radioButton2, radioButton3, radioButton4, radioFully, radioSemi, radioNot;
 
     ProgressBar propSubmitProgressBar;
     Uri imgUri;
 
     Button addFilterBtn, propertySubmitBtn, choosePropImgBtn;
     ImageView propImageView;
+    String propCatagory, propFurnished;
 
     SharedPreferences pref;
 
-//    String s;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_details);
@@ -228,30 +228,75 @@ public class HomeDetails extends AppCompatActivity {
                 View v = LayoutInflater.from(HomeDetails.this).inflate(R.layout.filter_popup_layout, null);
 
                 ImageButton closePopup = v.findViewById(R.id.closeFilterPopupBtn);
+                radioButton = v.findViewById(R.id.radioButton);
+                radioButton2 = v.findViewById(R.id.radioButton2);
+                radioButton3 = v.findViewById(R.id.radioButton3);
+                radioButton4 = v.findViewById(R.id.radioButton4);
 
-                //finish();
-
+                radioFully = v.findViewById(R.id.fully);
+                radioSemi = v.findViewById(R.id.semi);
+                radioNot = v.findViewById(R.id.not);
 
                 builder.setView(v);
 
                 final AlertDialog dialog = builder.create();
                 dialog.show();
 
-                cato_rg=v.findViewById(R.id.cato_rg);
-                int rodioid = cato_rg.getCheckedRadioButtonId();
-                radioButton= v.findViewById(rodioid);
-                editor.putString("cato", radioButton.getText().toString());
-                Toast.makeText(HomeDetails.this, radioButton.getText().toString(), Toast.LENGTH_SHORT).show();
-                editor.commit();
+                radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        if (b) propCatagory = radioButton.getText().toString();
+                        Log.d("HOME_DETS", radioButton.getText().toString() + " " + propCatagory);
+                    }
+                });
 
-                farni_rg=v.findViewById(R.id.farni_rg);
-                int rodioid1 = farni_rg.getCheckedRadioButtonId();
-                radioButton1= v.findViewById(rodioid1);
-                Log.d("HOME_DETAILS", radioButton1.getText().toString());
-                editor.putString("farn", radioButton1.getText().toString());
-                editor.commit();
+                radioButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        if (b) propCatagory = radioButton2.getText().toString();
+                        Log.d("HOME_DETS", radioButton2.getText().toString() + " " + propCatagory);
+                    }
+                });
 
+                radioButton3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        if (b) propCatagory = radioButton3.getText().toString();
+                        Log.d("HOME_DETS", radioButton3.getText().toString() + " " + propCatagory);
+                    }
+                });
 
+                radioButton4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        if (b) propCatagory = radioButton4.getText().toString();
+                        Log.d("HOME_DETS", radioButton4.getText().toString() + " " + propCatagory);
+                    }
+                });
+
+                radioFully.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        if (b) propFurnished = radioFully.getText().toString();
+                        Log.d("HOME_DETS", radioFully.getText().toString() + " " + propCatagory);
+                    }
+                });
+
+                radioSemi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        if (b) propFurnished = radioSemi.getText().toString();
+                        Log.d("HOME_DETS", radioSemi.getText().toString() + " " + propCatagory);
+                    }
+                });
+
+                radioNot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        if (b) propFurnished = radioNot.getText().toString();
+                        Log.d("HOME_DETS", radioNot.getText().toString() + " " + propCatagory);
+                    }
+                });
 
                 closePopup.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -320,7 +365,6 @@ public class HomeDetails extends AppCompatActivity {
         String vacant = pref.getString("vac", "");
         String ownerName = pref.getString("nam", "");
         String phone = pref.getString("pho", "");
-        String furnishing = pref.getString("farn", "");
         String propertyLocation = "Indiranagar";
         int price = pref.getInt("pri", 0);
 
@@ -334,8 +378,8 @@ public class HomeDetails extends AppCompatActivity {
                 vacant,
                 ownerName,
                 phone,
-                null,
-                furnishing,
+                propCatagory,
+                propFurnished,
                 propertyLocation,
                 null,
                 FirebaseAuth.getInstance().getCurrentUser().getUid()

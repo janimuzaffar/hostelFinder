@@ -10,62 +10,72 @@
         android:layout_height="wrap_content"
         android:text="Prices" />
 
-    <RadioButton
-        android:id="@+id/gt1k"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="> 1000" />
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
-    <RadioButton
-        android:id="@+id/gt3k"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="> 3000" />
+        <RadioButton
+            android:id="@+id/gt1k"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="> 1000" />
 
-    <RadioButton
-        android:id="@+id/gt6k"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="> 6000" />
+        <RadioButton
+            android:id="@+id/gt6k"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="> 6000" />
 
-    <RadioButton
-        android:id="@+id/gt10k"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="> 10000" />
+        <RadioButton
+            android:id="@+id/gt3k"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="> 3000" />
+
+        <RadioButton
+            android:id="@+id/gt10k"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="> 10000" />
+    </RadioGroup>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="CATOGORY" />
 
-    <RadioButton
-        android:id="@+id/BOYS"
+    <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="BOYS" />
+        android:layout_height="match_parent" >
 
-    <RadioButton
-        android:id="@+id/GIRLS"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="GIRLS" />
+        <RadioButton
+            android:id="@+id/BOYS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="BOYS" />
 
-    <RadioButton
-        android:id="@+id/FAMILY"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="FAMILY" />
+        <RadioButton
+            android:id="@+id/GIRLS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GIRLS" />
 
-    <RadioButton
-        android:id="@+id/ANY"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ANY" />
+        <RadioButton
+            android:id="@+id/FAMILY"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FAMILY" />
+
+        <RadioButton
+            android:id="@+id/ANY"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ANY" />
+    </RadioGroup>
 
     <TextView
         android:layout_width="match_parent"
@@ -77,33 +87,41 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/BHK1"
-            android:layout_width="79dp"
-            android:layout_height="wrap_content"
+        <RadioGroup
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="1BHK" />
+            android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/BHK2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="2BHK" />
+            <RadioButton
+                android:id="@+id/BHK1"
+                android:layout_width="79dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="1BHK" />
 
-        <RadioButton
-            android:id="@+id/BHK3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="3BHK" />
+            <RadioButton
+                android:id="@+id/BHK2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="2BHK" />
 
-        <RadioButton
-            android:id="@+id/BHK4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="4BHK" />
+            <RadioButton
+                android:id="@+id/BHK3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="3BHK" />
+
+            <RadioButton
+                android:id="@+id/BHK4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="4BHK" />
+        </RadioGroup>
+
     </LinearLayout>
 
     <TextView
@@ -116,26 +134,34 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/FULL"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="FULL" />
+            android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/SEMI"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="SEMI" />
+            <RadioButton
+                android:id="@+id/NOT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="NOT" />
 
-        <RadioButton
-            android:id="@+id/NOT"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="NOT" />
+            <RadioButton
+                android:id="@+id/SEMI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="SEMI" />
+
+            <RadioButton
+                android:id="@+id/FULL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="FULL" />
+        </RadioGroup>
+
     </LinearLayout>
 
     <LinearLayout
