@@ -5,23 +5,37 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.hostel.helpers.TableNames;
+import com.example.hostel.models.Notifications;
 import com.example.hostel.models.PropertyOwner;
+import com.example.hostel.models.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.WriteBatch;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 public class PropertyActivity extends AppCompatActivity {
 
     FirebaseFirestore firestore;
 
-    TextView propertyNameTV,ownerTV,socityTV,bedroomsTV,vacentTV,ownNameTV,phoneTV,priceTV,carogoryTV,furnishingTV;
+    TextView propertyNameTV,ownerTV,socityTV,bedroomsTV,vacentTV,ownNameTV,phoneTV,priceTV,carogoryTV,furnishingTV, bookRequestStatusTV;
     ImageView profilePropertyIV;
+    Button bookPropVisitBtn;
+    ProgressBar bookVisitProgressBar;
+
+    PropertyOwner props;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +57,23 @@ public class PropertyActivity extends AppCompatActivity {
         priceTV=findViewById(R.id.price);
         carogoryTV=findViewById(R.id.carogory);
         furnishingTV=findViewById(R.id.furnishing);
+        bookPropVisitBtn = findViewById(R.id.bookPropVisitBtn);
+        bookRequestStatusTV = findViewById(R.id.bookRequestStatusTV);
+        bookVisitProgressBar = findViewById(R.id.bookVisitProgressBar);
+
+        firestore.collection(TableNames.USERS).document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            if (((List)task.getResult().get(Users.PROPERTY_REQUEST_SENT)).contains(getIntent().getStringExtra(PropertyOwner.PROPERTY_ID))) {
+                                bookPropVisitBtn.setVisibility(View.GONE);
+                                bookRequestStatusTV.setText("Request Sent");
+                            }
+                        }
+                    }
+                });
 
         firestore.collection(TableNames.PROPERTY_OWNERS).document(getIntent().getStringExtra(PropertyOwner.PROPERTY_ID))
                 .get()
@@ -50,7 +81,7 @@ public class PropertyActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
-                            PropertyOwner props = task.getResult().toObject(PropertyOwner.class);
+                            props = task.getResult().toObject(PropertyOwner.class);
 
                             propertyNameTV.setText(props.getPropertyName());
                             ownerTV.setText(props.getOwnership());
@@ -71,5 +102,47 @@ public class PropertyActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+
+        bookPropVisitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bookPropVisitBtn.setVisibility(View.GONE);
+                bookVisitProgressBar.setVisibility(View.VISIBLE);
+
+                firestore.collection(TableNames.USERS).document(props.getUserId())
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    Notifications notification = new Notifications();
+
+                                    notification.setNotifyMsg(task.getResult().getString(Users.USER_NAME) + " has requested to visit your property " + props.getPropertyName());
+                                    notification.setNotifyUserId(task.getResult().getId());
+                                    notification.setPropertyId(getIntent().getStringExtra(PropertyOwner.PROPERTY_ID));
+                                    notification._setNotifyUserAvatar(task.getResult().getString(Users.USER_AVATAR));
+
+                                    firestore.collection(TableNames.NOTIFICATIONS).add(notification)
+                                            .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                    if (task.isSuccessful()) {
+                                                        bookVisitProgressBar.setVisibility(View.GONE);
+                                                        bookRequestStatusTV.setText("Request Sent");
+                                                        bookRequestStatusTV.setVisibility(View.VISIBLE);
+                                                    }
+                                                }
+                                            });
+
+                                    firestore.collection(TableNames.USERS).document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                            .update(Users.PROPERTY_REQUEST_SENT, FieldValue.arrayUnion(getIntent().getStringArrayExtra(PropertyOwner.PROPERTY_ID)));
+                                }
+                            }
+                        });
+
+
+            }
+        });
     }
 }

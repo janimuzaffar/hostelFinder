@@ -19,6 +19,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+
 public class SignupActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
@@ -68,7 +70,7 @@ public class SignupActivity extends AppCompatActivity {
                                 Log.d("SIGNUP", "inside signup auth");
                                 if (task.isSuccessful() && task.getResult() != null) {
                                     Log.d("SIGNUP", "inside signup auth SUCCESS");
-                                    Users user = new Users(username, email, pass);
+                                    Users user = new Users(username, email, pass, null, new ArrayList<String>());
 
                                     firestore.collection(TableNames.USERS).document(task.getResult().getUser().getUid())
                                             .set(user)

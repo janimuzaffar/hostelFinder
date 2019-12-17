@@ -2,10 +2,14 @@ package com.example.hostel.models;
 
 public class Notifications {
 
+    public static final String NOTIFY_ID = "notifyId";
+    public static final String NOTIFY_MSG = "notifyMsg";
+
     private String notifyId;
-    private String userId;
-    private String notifyUsername;
     private String notifyMsg;
+    private String notifyUserId;
+    private String propertyId;
+    private String notifyUserAvatar;
 
     public Notifications() {}
 
@@ -17,27 +21,35 @@ public class Notifications {
         this.notifyId = notifyId;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getNotifyUsername() {
-        return notifyUsername;
-    }
-
-    public void setNotifyUsername(String notifyUsername) {
-        this.notifyUsername = notifyUsername;
-    }
-
     public String getNotifyMsg() {
         return notifyMsg;
     }
 
     public void setNotifyMsg(String notifyMsg) {
         this.notifyMsg = notifyMsg;
+    }
+
+    public String getPropertyId() {
+        return propertyId;
+    }
+
+    public void setPropertyId(String propertyId) {
+        this.propertyId = propertyId;
+    }
+
+    public String getNotifyUserId() {
+        return notifyUserId;
+    }
+
+    public void setNotifyUserId(String notifyUserId) {
+        this.notifyUserId = notifyUserId;
+    }
+
+    public String _getNotifyUserAvatar() {
+        return notifyUserAvatar;
+    }
+
+    public void _setNotifyUserAvatar(String notifyUserAvatar) {
+        this.notifyUserAvatar = notifyUserAvatar;
     }
 }

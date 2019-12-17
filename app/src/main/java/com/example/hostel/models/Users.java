@@ -2,6 +2,8 @@ package com.example.hostel.models;
 
 import com.example.hostel.helpers.TableNames;
 
+import java.util.List;
+
 public class Users {
 
     public static final String USER_ID = "userId";
@@ -9,19 +11,23 @@ public class Users {
     public static final String USER_NAME = "user_name";
     public static final String PASSWORD = "password";
     public static final String USER_AVATAR = "userAvatar";
+    public static final String PROPERTY_REQUEST_SENT = "propertyRequestSent";
 
     private String userId;
     private String user_name;
     private String email;
     private String password;
     private String userAvatar;
+    private List<String> propertyRequestSent;
 
     public Users() {}
 
-    public Users(String username, String email, String pass){
+    public Users(String username, String email, String pass, String uavatar, List<String> propRequestSent){
         this.user_name = username;
         this.email = email;
         this.password = pass;
+        this.userAvatar = uavatar;
+        this.propertyRequestSent = propRequestSent;
     }
 
     public String _getUserId() {
@@ -62,5 +68,13 @@ public class Users {
 
     public void setUserAvatar(String userAvatar) {
         this.userAvatar = userAvatar;
+    }
+
+    public List<String> getPropertyRequestSent() {
+        return propertyRequestSent;
+    }
+
+    public void setPropertyRequestSent(List<String> propertyRequestSent) {
+        this.propertyRequestSent = propertyRequestSent;
     }
 }
