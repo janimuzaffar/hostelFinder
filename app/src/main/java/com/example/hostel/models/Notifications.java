@@ -4,6 +4,7 @@ public class Notifications {
 
     public static final String NOTIFY_ID = "notifyId";
     public static final String NOTIFY_MSG = "notifyMsg";
+    public static final String NOTIFY_USER_ID = "notifyUserId";
 
     private String notifyId;
     private String notifyMsg;

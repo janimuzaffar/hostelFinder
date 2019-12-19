@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -129,6 +130,38 @@ public class Notification extends Fragment  {
         notifyRecyclerView.setHasFixedSize(true);
 
 
+        firestore.collection(TableNames.NOTIFICATIONS)
+                .whereEqualTo(Notifications.NOTIFY_USER_ID, FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        notifyList = new ArrayList<>();
+
+                        if (task.isSuccessful()) {
+                            if (task.getResult().size() > 0) {
+                                for (QueryDocumentSnapshot doc : task.getResult()) {
+                                    Notifications notify = new Notifications();
+
+                                    notify._setNotifyId(doc.getId());
+                                    notify._setNotifyUserAvatar(null);
+                                    notify.setNotifyMsg(doc.getString(Notifications.NOTIFY_MSG));
+                                }
+
+                                notificationAdapter = new NotificationAdapter(getContext(), notifyList);
+                                notifyRecyclerView.setAdapter(notificationAdapter);
+
+                                notifyProgressBar.setVisibility(View.GONE);
+                                notifyRecyclerView.setVisibility(View.VISIBLE);
+                            } else {
+                                notifyProgressBar.setVisibility(View.GONE);
+                                notifyDefaultTV.setVisibility(View.VISIBLE);
+                            }
+
+                            Log.d("NOTIFY", task.getResult().size() + " size");
+                        }
+                    }
+                });
 
         return myview;
     }
@@ -145,40 +178,17 @@ public class Notification extends Fragment  {
                 allUserData = new HashMap<>();
 
                 for (QueryDocumentSnapshot doc : task.getResult()) {
-                    Users user = doc.toObject(Users.class);
+                    Users user = new Users();
+
+                    user.setUser_name(doc.getString(Users.USER_NAME));
+                    user.setUserAvatar(doc.getString(Users.USER_AVATAR));
 
                     allUserData.put(doc.getId(), user);
                 }
 
-                firestore.collection(TableNames.NOTIFICATIONS).whereEqualTo(Users.USER_ID, FirebaseAuth.getInstance().getCurrentUser().getUid())
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                notifyList = new ArrayList<>();
+                Log.d("NOTIFI", allUserData.toString());
 
-                                if (task.isSuccessful()) {
-                                    if (task.getResult().size() > 0) {
-                                        for (QueryDocumentSnapshot doc : task.getResult()) {
-                                            Notifications notify = new Notifications();
 
-                                            notify._setNotifyId(doc.getId());
-                                            notify._setNotifyUserAvatar(allUserData.get(notify.getNotifyUserId()).getUserAvatar());
-                                            notify.setNotifyMsg(doc.getString(Notifications.NOTIFY_MSG));
-                                        }
-
-                                        notificationAdapter = new NotificationAdapter(getContext(), notifyList);
-                                        notifyRecyclerView.setAdapter(notificationAdapter);
-
-                                        notifyProgressBar.setVisibility(View.GONE);
-                                        notifyRecyclerView.setVisibility(View.VISIBLE);
-                                    } else {
-                                        notifyProgressBar.setVisibility(View.GONE);
-                                        notifyDefaultTV.setVisibility(View.VISIBLE);
-                                    }
-                                }
-                            }
-                        });
             }
         });
     }

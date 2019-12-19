@@ -136,7 +136,7 @@ public class PropertyActivity extends AppCompatActivity {
                                             });
 
                                     firestore.collection(TableNames.USERS).document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                            .update(Users.PROPERTY_REQUEST_SENT, FieldValue.arrayUnion(getIntent().getStringArrayExtra(PropertyOwner.PROPERTY_ID)));
+                                            .update(Users.PROPERTY_REQUEST_SENT, FieldValue.arrayUnion(getIntent().getStringExtra(PropertyOwner.PROPERTY_ID)));
                                 }
                             }
                         });
